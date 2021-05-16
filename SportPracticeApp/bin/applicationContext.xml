@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+    <!-- the code below is used to define the beans for externally creating and managing the
+	objects for the different coach  class -->
+	
+	
+	<!-- the code below is used for creating the bean for the basketball coach class -->
+	<bean id="basketBallCoach" 
+		class="com.example.sportPractice.BasketBallCoach">  <!-- in this line of code we are
+		providing an id for our bean that will act as an alias and giving the path to the 
+		basketBallCoach class in our project so as to create an object of the basketball coach class -->
+	</bean>
+	
+	
+	<!-- the code below is used for creating the bean for the football coach class -->
+	<bean id="footBallCoach"
+		class="com.example.sportPractice.FootballCoach">  <!-- in this line of code we are
+		providing an id for our bean that will act as an alias and giving the path to the 
+		footballCoach class in our project so as to create an object of the football coach class -->
+	</bean>
+	
+	
+	<!-- the code below is used to define the bean for the Happy fortune service class -->
+	<bean id="happyFortuneService" 
+		class="com.example.sportPractice.helperDependency.HappyFortuneService">
+	</bean>
+	
+	
+	
+	<!-- the code below is used to define the bean for the cricket coach class -->
+	<bean id="cricketCoach"
+		class="com.example.sportPractice.CricketCoach">  <!-- in this line of code we are
+		providing an id for our bean that will act as an alias and giving the path to the 
+		cricketCoach class in our project so as to create an object of the cricket coach class -->
+		
+		<!-- the code below is used to create a reference to the happyFortuneService bean for getting
+		 the daily fortune using the constructor injection method of the dependency injection -->
+		<constructor-arg ref="happyFortuneService" />
+		
+	</bean>
+
+</beans>
+
+
+
+
+

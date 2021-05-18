@@ -7,9 +7,19 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+
+	<!-- the code below is used to load the properties file into the spring container -->
+	<context:property-placeholder location="classpath:sports.properties" />  <!-- here we are loading the 
+	properties file present in the classpath of the project -->
+
 	
     <!-- the code below is used to define the beans for externally creating and managing the
 	objects for the different coach  class -->
+	
+	<!-- the code below is used to define the bean for the Happy fortune service class -->
+	<bean id="happyFortuneService" 
+		class="com.example.sportPractice.helperDependency.HappyFortuneService">
+	</bean>
 	
 	
 	<!-- the code below is used for creating the bean for the basketball coach class -->
@@ -25,15 +35,21 @@
 		class="com.example.sportPractice.FootballCoach">  <!-- in this line of code we are
 		providing an id for our bean that will act as an alias and giving the path to the 
 		footballCoach class in our project so as to create an object of the football coach class -->
+		
+		<!-- the code below is used to do the setter injection for injecting the dependency in the FootballCoach 
+		 	class to get the fortune using the helper HappyFortuneService class -->
+		<property name="fortuneInterfaceService" ref="happyFortuneService" />
+		
+		<!-- the code below is used to read the name of the football player and the name of the team to 
+		 which he belongs using the properties file -->
+		<property name="footballPlayerName" value="${ball.playerName}" />
+		<property name="teamName" value="${ball.teamName}" />
+		
+		
 	</bean>
 	
-	
-	<!-- the code below is used to define the bean for the Happy fortune service class -->
-	<bean id="happyFortuneService" 
-		class="com.example.sportPractice.helperDependency.HappyFortuneService">
-	</bean>
-	
-	
+
+
 	
 	<!-- the code below is used to define the bean for the cricket coach class -->
 	<bean id="cricketCoach"
@@ -45,6 +61,31 @@
 		 the daily fortune using the constructor injection method of the dependency injection -->
 		<constructor-arg ref="happyFortuneService" />
 		
+		<!-- the code below is used to set the email address of the coach and the name of the team -->
+		<property name="coachEmailAddress" value="teamCoach@email.com"/>
+		<property name="teamName" value="Royal Challangers Banglore"/>
+		
+	</bean>
+
+
+	<!-- The code below is used to create a bean for the RandomFortuneService class -->
+	<bean id="randomFortuneService"
+		class="com.example.sportPractice.randomFortuneDependency.RandomFortuneService" >   <!-- in this line of code we are
+		providing an id for our bean that will act as an alias and giving the path to the
+		random fortune service class in our project so as to create an object of the random fortune service class
+		class -->
+	</bean>
+
+	<!-- The code below is used to create a bean for the Golf Coach class -->
+	<bean id="theGolfCoach"
+		class="com.example.sportPractice.GolfCoach">   <!-- in this line of code we are
+		providing an id for our bean that will act as an alias and giving the path to the
+		Golf coach class in our project so as to create an object of the golf coach  class
+		class -->
+
+		<!-- the code below is used to do the setter injection to get the daily fortune for the Golf
+		players using the helper or the dependency class named RandomFortuneService -->
+		<property name="FortuneService" ref="randomFortuneService" />
 	</bean>
 
 </beans>
